@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   
   def index
     @books = Book.all
+    @book = Book.new #空のモデルを生成。インスタンス変数@bookに代入してview利用可能
   end
 
   def show
@@ -11,7 +12,7 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params)
     book.save
-    redirect_to books_path
+    redirect_to book_path(book)
   end
 
   def edit
@@ -21,7 +22,7 @@ class BooksController < ApplicationController
   def update
     book = Book.find(params[:id])
     book.update(book_params)
-    redirect_to show_book_path
+    redirect_to book_path
   end
 
   def destroy
