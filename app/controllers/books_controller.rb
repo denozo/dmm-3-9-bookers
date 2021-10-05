@@ -11,8 +11,11 @@ class BooksController < ApplicationController
 
   def create
     book = Book.new(book_params)
-    book.save
-    redirect_to book_path(book)
+    if book.save
+      redirect_to book_path(book), notice: 'Book was successfully created.' #notice: で 第二引数に指定
+    else
+      render :new
+    end
   end
 
   def edit
