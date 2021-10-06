@@ -12,7 +12,8 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params)
     if book.save
-      redirect_to book_path(book), notice: 'Book was successfully created.' #notice: で 第二引数に指定
+      flash[:notice] = 'Book was successfully'
+      redirect_to book_path(book)
     else
       render :new
     end
@@ -25,7 +26,8 @@ class BooksController < ApplicationController
   def update
     book = Book.find(params[:id])
     if book.update(book_params)
-      redirect_to book_path, notice: 'Book was successfully updated'
+      flash[:notice] = 'Book was successfully updated'
+      redirect_to book_path
     else
       render :new
     end
