@@ -2,21 +2,23 @@ class BooksController < ApplicationController
   
   def index
     @books = Book.all
-    @book = Book.new #空のモデルを生成。インスタンス変数@bookに代入してview利用可能
-  end
-
-  def show
-    @book = Book.find(params[:id])
+    @book = Book.new
   end
 
   def create
-    book = Book.new(book_params)
-    if book.save
-      flash[:notice] = 'Book was successfully'
-      redirect_to book_path(book)
+    @books = Book.all #これはなぜ？インスタンス変数は別のアクションで使えないの？理解していないところ
+    
+    @book = Book.new(book_params)
+    if @book.save
+      flash[:notice] = 'Book was successfully created.'
+      redirect_to book_path(@book)
     else
-      render :new
+      render :index
     end
+  end
+  
+  def show
+    @book = Book.find(params[:id])
   end
 
   def edit
@@ -24,12 +26,13 @@ class BooksController < ApplicationController
   end
   
   def update
-    book = Book.find(params[:id])
-    if book.update(book_params)
-      flash[:notice] = 'Book was successfully updated'
-      redirect_to book_path
+    
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      flash[:notice] = 'Book was successfully updated.'
+      redirect_to book_path(@book)
     else
-      render :new
+      render :edit
     end
   end
 
