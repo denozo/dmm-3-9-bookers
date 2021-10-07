@@ -51,6 +51,12 @@ label {
   margin-bottom: 10px;
 }
 
+a:hover {
+  color: #fff;
+  background-color: black;
+}
+
+
 /*id指定*/
 #notice {
   color: green;
