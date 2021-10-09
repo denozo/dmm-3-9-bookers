@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   
   def index
-    @books = Book.all.order(id: "DESC")
+    @books = Book.all.order(id: "DESC") #降順追加
     @book = Book.new
   end
 
